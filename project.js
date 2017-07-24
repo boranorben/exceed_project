@@ -295,6 +295,13 @@ $(document).ready(function () {
     }
     nobtn_h.onclick = function () {
         smallModal.style.display = "none";
+    yesbtn.onclick = function () {
+        modal.style.display = "none";
+        amb = true;
+    }
+    nobtn.onclick = function () {
+        modal.style.display = "none";
+        amb = false;
     }
 
 });
