@@ -54,7 +54,7 @@ $(document).ready(function () {
             url: link + "temperature"
         }).done(function (data) {
             if (data > 110) {
-                $('#temperature').attr('src', 'images/icon/temp-red.png');
+                $('#temperature').attr('src', 'images/icon/temp-hot.png');
                 element.innerHTML = "DANGER!!! Your engine is too hot!!!";
                 t.style.backgroundColor = "#e74c3c"; 
                 head.style.fontWeight = "900";
