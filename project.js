@@ -108,7 +108,7 @@ $(document).ready(function () {
                 element.innerHTML = "No smoke detected";
                 $('#smoke').attr('src', 'images/icon/fire.png');
                 $.ajax({
-                    url: link + "glass/set/0"
+                    url: link + "servo/set/0"
                 }).done(function () {
                     console.log("success");
                 }).fail(function () {
@@ -123,17 +123,13 @@ $(document).ready(function () {
                 $.ajax({
                     url: link + "led/set/1"
                 })
+                $.ajax({
+                    url: link + "servo/set/1"
+                })
                 l.innerHTML = "Light is on. Help required immediately!!!";
                 ta.style.backgroundImage = "url('images/danger.jpg')";
                 head.style.fontWeight = "900";
                 head.style.color = "white";
-                $.ajax({
-                    url: link + "glass/set/1"
-                }).done(function () {
-                    console.log("success");
-                }).fail(function () {
-                    console.log("fail");
-                })
             }
         }).fail(function () {
             console.log("failed");
