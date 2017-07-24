@@ -16,4 +16,8 @@ $(document).ready(function() {
             console.log("failed");
         }) 
     },1000)
+
+    setInterval(() => {
+        
+    })
 });
