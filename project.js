@@ -74,6 +74,9 @@ $(document).ready(function () {
                 t = 3;
                 if (!modal_closed) {
                     modal.style.display = "block";
+                    setTimeout(function () {
+                        modal.style.display = "none";
+                    }, 5000);
                     modal_closed = true;
                 }
             } else {
@@ -142,6 +145,9 @@ $(document).ready(function () {
                 if (!modal_closed) {
                     modal.style.display = "block";
                     modal_closed = true;
+                    setTimeout(function () {
+                        modal.style.display = "none";
+                    }, 5000);
                 }
                 $.ajax({
                     url: link + "glass/set/1"
@@ -174,6 +180,9 @@ $(document).ready(function () {
                     if (!modal_closed) {
                         modal.style.display = "block";
                         modal_closed = true;
+                        setTimeout(function () {
+                            modal.style.display = "none";
+                        }, 5000);
                     }
                 } else {
                     f = 2;
@@ -188,6 +197,9 @@ $(document).ready(function () {
                     if (!modal_closed) {
                         modal.style.display = "block";
                         modal_closed = true;
+                        setTimeout(function () {
+                            modal.style.display = "none";
+                        }, 5000);
                     }
                 }
             }
@@ -214,6 +226,9 @@ $(document).ready(function () {
                     if (!modal_closed) {
                         modal.style.display = "block";
                         modal_closed = true;
+                        setTimeout(function () {
+                            modal.style.display = "none";
+                        }, 5000);
                     }
                 } else {
                     b = 2;
@@ -228,6 +243,9 @@ $(document).ready(function () {
                     if (!modal_closed) {
                         modal.style.display = "block";
                         modal_closed = true;
+                        setTimeout(function () {
+                            modal.style.display = "none";
+                        }, 5000);
                     }
                 }
             }
@@ -258,12 +276,6 @@ $(document).ready(function () {
             amb = false;
         }
     }, 1000)
-
-    var btnn = document.getElementById('btn');
-
-    btn.onclick = function() {
-    modal.style.display = "block";
-}
 
     yesbtn.onclick = function () {
         modal.style.display = "none";
