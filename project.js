@@ -48,6 +48,7 @@ $(document).ready(function () {
             url: link + "temperature"
         }).done(function (data) {
             element.innerHTML = data;
+            // console.log("temp");
         }).fail(function () {
             console.log("fail");
         })
@@ -76,13 +77,14 @@ $(document).ready(function () {
                 front = data;
                 d_front = new Date();
                 if (data >= soft_front) {
-
+                    console.log("soft front");
                 } else if (data >= medium_front) {
-
+                    console.log("medium");
                 } else {
-
+                    console.log("hard front");
                 }
             }
+                console.log(front);
         }).fail(function () {
             console.log("fail");
         })
@@ -96,11 +98,12 @@ $(document).ready(function () {
                 back = data;
                 d_back = new Date();
                 if (data >= soft_back) {
-
+                    console.log("soft back");
                 } else {
-
+                    console.log("hard back");
                 }
             }
+            console.log(back);
         }).fail(function () {
             console.log("fail");
         })
@@ -124,6 +127,8 @@ $(document).ready(function () {
                     stats++;
                 }
             }
+            var element = document.getElementById("stats");
+            element.innerHTML = stats;
         }
         d_back = 0;
         d_front = 0;
