@@ -59,8 +59,10 @@ $(document).ready(function () {
                 t.style.backgroundColor = "#e74c3c"; 
                 head.style.fontWeight = "900";
                 head.style.color = "white";
+                t = false;
             } else {
                 $('#temperature').attr('src', 'images/icon/temp.png');
+                t = true;
             }
         }).fail(function () {
             console.log("fail");
@@ -121,6 +123,7 @@ $(document).ready(function () {
                 front = data;
                 d_front = new Date();
                 if (data >= soft_front) {
+                    f = true;
                     console.log("soft front");
                 } else if (data >= medium_front) {
                     console.log("medium");
