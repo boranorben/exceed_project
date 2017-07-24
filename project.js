@@ -47,7 +47,7 @@ $(document).ready(function () {
     distance_back();
 
     setInterval(() => {
-        var t = document.getElementById("tb");
+        var ta = document.getElementById("tb");
         var element = document.getElementById("temp");
         var head = document.getElementById("hd");
         $.ajax({
@@ -57,7 +57,8 @@ $(document).ready(function () {
                 $('#temperature').attr('src', 'images/icon/temp-hot.png');
                 $('#lighting').attr('src', 'images/icon/lighting-on.png');
                 element.innerHTML = "DANGER!!! Your engine is too hot!!!";
-                t.style.backgroundColor = "#e74c3c";
+                ta.style.backgroundImage = "url('images/danger.jpg')";
+                // t.style.backgroundColor = "#e74c3c";
                 head.style.fontWeight = "900";
                 head.style.color = "white";
                 t = false;
@@ -76,7 +77,8 @@ $(document).ready(function () {
         if (t == 0 && s == 0 && b == 0 && f == 0) {
             head.style.fontWeight = "100";
             head.style.color = "black";
-            ta.style.backgroundColor = "#1abc9c";
+            t.style.backgroundImage = "url('images/fine.jpg')";
+            // ta.style.backgroundColor = "#1abc9c";
             head.innerHTML = "Everything is safe. You are good to go.";
         }
     }, 1000)
@@ -105,9 +107,9 @@ $(document).ready(function () {
                 head.innerHTML = "ESCAPE YOUR VEHICLE NOW!!!";
                 $('#smoke').attr('src', 'images/icon/fire-red.png');
                 $('#lighting').attr('src', 'images/icon/lighting-on.png');
+                ta.style.backgroundImage = "url('images/danger.jpg')";
                 head.style.fontWeight = "900";
                 head.style.color = "white";
-                ta.style.backgroundColor = "#e74c3c";
                 $.ajax({
                     url: link + "glass/set/1"
                 }).done(function () {
@@ -132,15 +134,18 @@ $(document).ready(function () {
                 d_front = new Date();
                 if (data >= soft_front && s == 0 && t == 0) {
                     f = 1;
-                    ta.style.backgroundColor = "#f39c12";
+                    t.style.backgroundImage = "url('images/little.jpg')";
+                    // ta.style.backgroundColor = "#f39c12";
                     head.innerHTML = "There has been a small accident!!";
                 } else if (data >= medium_front && s == 0 && t == 0) {
                     f = 2;
-                    ta.style.backgroundColor = "#d35400";
+                    t.style.backgroundImage = "url('images/medium.jpg')";
+                    // ta.style.backgroundColor = "#d35400";
                     head.innerHTML = "There has been an accident!!";
                 } else {
                     f = 3;
-                    ta.style.backgroundColor = "#e74c3c";
+                    t.style.backgroundImage = "url('images/danger.jpg')";
+                    // ta.style.backgroundColor = "#e74c3c";
                     head.innerHTML = "Bad accident. Help required immediatelly";
                     $('#lighting').attr('src', 'images/icon/lighting-on.png');
                 }
@@ -161,11 +166,13 @@ $(document).ready(function () {
                 d_back = new Date();
                 if (data >= soft_back && s == 0 && t == 0) {
                     b = 1;
-                    ta.style.backgroundColor = "#f39c12";
+                    // ta.style.backgroundColor = "#f39c12";
+                    t.style.backgroundImage = "url('images/little.jpg')";
                     head.innerHTML = "There has been a small accident!!";
                 } else {
                     b = 3;
-                    ta.style.backgroundColor = "#e74c3c";
+                    // ta.style.backgroundColor = "#e74c3c";
+                    t.style.backgroundImage = "url('images/danger.jpg')";
                     head.innerHTML = "Bad accident. Help required immediatelly";
                     $('#lighting').attr('src', 'images/icon/lighting-on.png');
                 }
