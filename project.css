@@ -1029,11 +1029,12 @@ body.is-loading #banner>.inner {
 /* Modal Content/Box */
 
 .modal-content {
-	background-color:#e74c3c;
+	background-image: url("images/danger.jpg");
 	margin: 15% auto;
 	padding: 20px;
 	width: 50%;
 }
+
 
 /* The Close Button */
 
@@ -1049,4 +1050,12 @@ body.is-loading #banner>.inner {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+#modal-content {
+	margin: auto;
+}
+
+#yesbtn, #nobtn {
+	background: black;
 }

@@ -8,6 +8,11 @@ $(document).ready(function () {
     var front = 0;
     var time = 0;
     var amb = false;
+    var modal_closed = false;
+    var modal = document.getElementById('myModal');
+    var yesbtn = document.getElementById("yesbtn");
+    var nobtn = document.getElementById("nobtn");
+
     $.ajax({
         url: link + "front"
     }).done(function (data) {
@@ -67,6 +72,10 @@ $(document).ready(function () {
                 head.style.fontWeight = "900";
                 head.style.color = "white";
                 t = 3;
+                if (!modal_closed) {
+                    modal.style.display = "block";
+                    modal_closed = true;
+                }
             } else {
                 $('#temperature').attr('src', 'images/icon/temp.png');
                 element.innerHTML = "Temperature is normal.";
@@ -130,6 +139,17 @@ $(document).ready(function () {
                 ta.style.backgroundImage = "url('images/danger.jpg')";
                 head.style.fontWeight = "900";
                 head.style.color = "white";
+                if (!modal_closed) {
+                    modal.style.display = "block";
+                    modal_closed = true;
+                }
+                $.ajax({
+                    url: link + "glass/set/1"
+                }).done(function () {
+                    console.log("success");
+                }).fail(function () {
+                    console.log("fail");
+                })
             }
         }).fail(function () {
             console.log("failed");
@@ -151,6 +171,10 @@ $(document).ready(function () {
                     f = 1;
                     ta.style.backgroundImage = "url('images/little.jpg')";
                     head.innerHTML = "There has been a small accident!!";
+                    if (!modal_closed) {
+                        modal.style.display = "block";
+                        modal_closed = true;
+                    }
                 } else {
                     f = 2;
                     amb = true;
@@ -161,6 +185,10 @@ $(document).ready(function () {
                         url: link + "led/set/1"
                     })
                     l.innerHTML = "Light is on. Help required immediately!!!";
+                    if (!modal_closed) {
+                        modal.style.display = "block";
+                        modal_closed = true;
+                    }
                 }
             }
         }).fail(function () {
@@ -183,6 +211,10 @@ $(document).ready(function () {
                     b = 1;
                     ta.style.backgroundImage = "url('images/little.jpg')";
                     head.innerHTML = "There has been a small accident!!";
+                    if (!modal_closed) {
+                        modal.style.display = "block";
+                        modal_closed = true;
+                    }
                 } else {
                     b = 2;
                     amb = true;
@@ -193,6 +225,10 @@ $(document).ready(function () {
                         url: link + "led/set/1"
                     })
                     l.innerHTML = "Light is on. Help required immediately!!!";
+                    if (!modal_closed) {
+                        modal.style.display = "block";
+                        modal_closed = true;
+                    }
                 }
             }
         }).fail(function () {
@@ -202,7 +238,7 @@ $(document).ready(function () {
 
     setInterval(() => {
         var element = document.getElementById("help");
-        var l = document.getElementById("light");   
+        var l = document.getElementById("light");
         if (amb) {
             time++;
             element.innerHTML = "Ambulance is on the way.";
@@ -223,29 +259,11 @@ $(document).ready(function () {
         }
     }, 1000)
 
-    // Get the modal
-    var modal = document.getElementById('myModal');
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on the button, open the modal 
-    btn.onclick = function () {
-        modal.style.display = "block";
+    yesbtn.onclick = function () {
+        modal.style.display = "none";
     }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
+    nobtn.onclick = function () {
         modal.style.display = "none";
     }
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
 });
