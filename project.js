@@ -57,6 +57,9 @@ $(document).ready(function () {
             if (keep > 22 && b != 3 && f != 3) {
                 $('#temperature').attr('src', 'images/icon/temp-hot.png');
                 $('#lighting').attr('src', 'images/icon/lighting-on.png');
+                $.ajax({
+                    url: link + "led/set/1"
+                })
                 l.innerHTML = "Light is on. Help required immediately!!!";
                 head.innerHTML = "DANGER!!! Help required immediately!!!";
                 element.innerHTML = "DANGER!!! Your engine is too hot!!!";
@@ -84,6 +87,9 @@ $(document).ready(function () {
             ta.style.backgroundImage = "url('images/fine.jpg')";
             head.innerHTML = "Everything is safe. You are good to go.";
             $('#lighting').attr('src', 'images/icon/lighting.png');
+            $.ajax({
+                url: link + "led/set/0"
+            })
             l.innerHTML = "Light is off. All is well!!!";
         }
     }, 1000)
@@ -114,6 +120,9 @@ $(document).ready(function () {
                 head.innerHTML = "ESCAPE YOUR VEHICLE NOW!!!";
                 $('#smoke').attr('src', 'images/icon/fire-red.png');
                 $('#lighting').attr('src', 'images/icon/lighting-on.png');
+                $.ajax({
+                    url: link + "led/set/1"
+                })
                 l.innerHTML = "Light is on. Help required immediately!!!";
                 ta.style.backgroundImage = "url('images/danger.jpg')";
                 head.style.fontWeight = "900";
@@ -152,6 +161,9 @@ $(document).ready(function () {
                     head.innerHTML = "Bad accident. Help required immediatelly!!!";
                     ta.style.backgroundImage = "url('images/danger.jpg')";
                     $('#lighting').attr('src', 'images/icon/lighting-on.png');
+                    $.ajax({
+                        url: link + "led/set/1"
+                    })
                     l.innerHTML = "Light is on. Help required immediately!!!";
                 }
             }
@@ -181,6 +193,9 @@ $(document).ready(function () {
                     head.innerHTML = "Bad accident. Help required immediatelly";
                     ta.style.backgroundImage = "url('images/danger.jpg')";
                     $('#lighting').attr('src', 'images/icon/lighting-on.png');
+                    $.ajax({
+                        url: link + "led/set/1"
+                    })
                     l.innerHTML = "Light is on. Help required immediately!!!";
                 }
             }
@@ -191,6 +206,7 @@ $(document).ready(function () {
 
     setInterval(() => {
         var element = document.getElementById("help");
+        var l = document.getElementById("light");   
         if (amb) {
             time++;
             element.innerHTML = "Ambulance is on the way.";
@@ -199,7 +215,11 @@ $(document).ready(function () {
         if (time == 10) {
             element.innerHTML = "Ambulance has reached. You are in safe hands now."
             $('#ambulance').attr('src', 'images/icon/ambulance-reached.png');
+            $.ajax({
+                url: link + "led/set/0"
+            })
             $('#lighting').attr('src', 'images/icon/lighting.png');
+            l.innerHTML = "Light is off. All is well!!!";
             time = 0;
             amb = false;
         }
