@@ -9,10 +9,10 @@ $(document).ready(function () {
     var d_front = 0;
     var d_back = 0;
     var stats = 0;
-    
+
     $.ajax({
-        url : link + "stats"
-    }).done(function(data) {
+        url: link + "stats"
+    }).done(function (data) {
         stats = data;
     })
 
@@ -41,6 +41,17 @@ $(document).ready(function () {
 
     distance_front();
     distance_back();
+
+    setInterval(() => {
+        var element = document.getElementById("temperature");
+        $.ajax({
+            url: link + "temperature"
+        }).done(function (data) {
+            element.innerHTML = data;
+        }).fail(function () {
+            console.log("fail");
+        })
+    }, 1000)
 
     setInterval(() => {
         var element = document.getElementById("smoke");
