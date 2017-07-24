@@ -5,8 +5,20 @@ $(document).ready(function () {
     var s = 0;
     var f = 0;
     var b = 0;
-    var front = 0;
-    var back = 0;
+    var front = 21;
+    $.ajax({
+        url: link + "front"
+    }).done(function (data) {
+        front = data;
+        console.log(front);
+    })
+    var back = 22;
+    $.ajax({
+        url: link + "back"
+    }).done(function (data) {
+        back = data;
+        console.log(back);
+    })
     var soft_front = 0;
     var medium_front = 0;
     var soft_back = 0;
@@ -21,26 +33,12 @@ $(document).ready(function () {
     })
 
     var distance_front = function () {
-        $.ajax({
-            url: link + "front"
-        }).done(function (data) {
-            front = data;
-            soft_front = data - (0.05 * data);
-            medium_front = data - (0.1 * data);
-        }).fail(function () {
-            console.log("fail");
-        })
+        soft_front = front - (0.05 * front);
+        medium_front = front - (0.1 * front);
     }
 
     var distance_back = function () {
-        $.ajax({
-            url: link + "back"
-        }).done(function (data) {
-            back = data;
-            soft_back = data - (0.2 * data);
-        }).fail(function () {
-            console.log("fail");
-        })
+        soft_back = back - (0.2 * back);
     }
 
     distance_front();
@@ -53,17 +51,18 @@ $(document).ready(function () {
         $.ajax({
             url: link + "temperature"
         }).done(function (data) {
-            if (data > 110) {
+            if (data > 110 && b != 3 && f != 3) {
+                stats++;
                 $('#temperature').attr('src', 'images/icon/temp-hot.png');
                 $('#lighting').attr('src', 'images/icon/lighting-on.png');
                 element.innerHTML = "DANGER!!! Your engine is too hot!!!";
                 t.style.backgroundColor = "#e74c3c";
                 head.style.fontWeight = "900";
                 head.style.color = "white";
-                t = false;
+                t = 3;
             } else {
                 $('#temperature').attr('src', 'images/icon/temp.png');
-                t = true;
+                t = 0;
             }
         }).fail(function () {
             console.log("fail");
@@ -78,6 +77,7 @@ $(document).ready(function () {
             head.style.color = "black";
             ta.style.backgroundColor = "#1abc9c";
             head.innerHTML = "Everything is safe. You are good to go.";
+            $('#lighting').attr('src', 'images/icon/lighting.png');
         }
     }, 1000)
 
@@ -99,7 +99,8 @@ $(document).ready(function () {
                 }).fail(function () {
                     console.log("fail");
                 })
-            } else if(f != 3 && b != 3){
+            } else if (f != 2 && b != 2) {
+                stats++;
                 s = 2;
                 element.innerHTML = "DANGER!! Escape from your vehicle now!!!";
                 head.innerHTML = "ESCAPE YOUR VEHICLE NOW!!!";
@@ -127,6 +128,8 @@ $(document).ready(function () {
         $.ajax({
             url: link + "front"
         }).done(function (data) {
+            console.log("soft" + soft_front);
+            console.log(data);
             if (data < front) {
                 front = data;
                 d_front = new Date();
@@ -134,16 +137,13 @@ $(document).ready(function () {
                     f = 1;
                     ta.style.backgroundColor = "#f39c12";
                     head.innerHTML = "There has been a small accident!!";
-                } else if (data >= medium_front && s == 0 && t == 0) {
-                    f = 2;
-                    ta.style.backgroundColor = "#d35400";
-                    head.innerHTML = "There has been an accident!!";
                 } else {
-                    f = 3;
+                    f = 2;
                     ta.style.backgroundColor = "#e74c3c";
-                    head.innerHTML = "Bad accident. Help required immediatelly";
+                    head.innerHTML = "Bad accident. Help required immediatelly!!!";
                     $('#lighting').attr('src', 'images/icon/lighting-on.png');
                 }
+                distance_front();
             }
         }).fail(function () {
             console.log("fail");
@@ -156,6 +156,8 @@ $(document).ready(function () {
         $.ajax({
             url: link + "back"
         }).done(function (data) {
+            console.log("back" + soft_back);
+            console.log(data);
             if (data < back) {
                 back = data;
                 d_back = new Date();
@@ -164,20 +166,19 @@ $(document).ready(function () {
                     ta.style.backgroundColor = "#f39c12";
                     head.innerHTML = "There has been a small accident!!";
                 } else {
-                    b = 3;
+                    b = 2;
                     ta.style.backgroundColor = "#e74c3c";
                     head.innerHTML = "Bad accident. Help required immediatelly";
                     $('#lighting').attr('src', 'images/icon/lighting-on.png');
                 }
+                distance_back();
             }
-            console.log(back);
         }).fail(function () {
             console.log("fail");
         })
     }, 1000)
 
     setInterval(() => {
-        var element = document.getElementById("stats");
         var diff;
         if (d_back != 0 && d_front != 0) {
             if (d_back.getMinutes() == d_front.getMinutes()) {
@@ -200,7 +201,7 @@ $(document).ready(function () {
         }
         d_back = 0;
         d_front = 0;
-    }, 30000)
+    }, 1000)
 
     // Get the modal
     var modal = document.getElementById('myModal');
