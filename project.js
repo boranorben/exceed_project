@@ -8,10 +8,14 @@ $(document).ready(function () {
     var front = 0;
     var time = 0;
     var amb = false;
-    var modal_closed = false;
-    var modal = document.getElementById('myModal');
-    var yesbtn = document.getElementById("yesbtn");
-    var nobtn = document.getElementById("nobtn");
+    var smallModal_closed = false;
+    var hardModal_closed = false;
+    var smallModal = document.getElementById('smallModal');
+    var yesbtn_s = document.getElementById("yesbtn_s");
+    var nobtn_s = document.getElementById("nobtn_s");
+    var hardModal = document.getElementById('hardModal');
+    var yesbtn_h = document.getElementById("yesbtn_h");
+    var nobtn_h = document.getElementById("nobtn_h");
 
     $.ajax({
         url: link + "front"
@@ -72,12 +76,12 @@ $(document).ready(function () {
                 head.style.fontWeight = "900";
                 head.style.color = "white";
                 t = 3;
-                if (!modal_closed) {
-                    modal.style.display = "block";
+                if (!hardModal_closed) {
+                    hardModal.style.display = "block";
                     setTimeout(function () {
-                        modal.style.display = "none";
+                        hardModal.style.display = "none";
                     }, 5000);
-                    modal_closed = true;
+                    hardModal_closed = true;
                 }
             } else {
                 $('#temperature').attr('src', 'images/icon/temp.png');
@@ -142,12 +146,12 @@ $(document).ready(function () {
                 ta.style.backgroundImage = "url('images/danger.jpg')";
                 head.style.fontWeight = "900";
                 head.style.color = "white";
-                if (!modal_closed) {
-                    modal.style.display = "block";
-                    modal_closed = true;
+                if (!hardModal_closed) {
+                    hardModal.style.display = "block";
                     setTimeout(function () {
-                        modal.style.display = "none";
+                        hardModal.style.display = "none";
                     }, 5000);
+                    hardModal_closed = true;
                 }
                 $.ajax({
                     url: link + "glass/set/1"
@@ -177,11 +181,11 @@ $(document).ready(function () {
                     f = 1;
                     ta.style.backgroundImage = "url('images/little.jpg')";
                     head.innerHTML = "There has been a small accident!!";
-                    if (!modal_closed) {
-                        modal.style.display = "block";
-                        modal_closed = true;
+                    if (!smallModal_closed) {
+                        smallModal.style.display = "block";
+                        smallModal_closed = true;
                         setTimeout(function () {
-                            modal.style.display = "none";
+                            smallModal.style.display = "none";
                         }, 5000);
                     }
                 } else {
@@ -194,12 +198,12 @@ $(document).ready(function () {
                         url: link + "led/set/1"
                     })
                     l.innerHTML = "Light is on. Help required immediately!!!";
-                    if (!modal_closed) {
-                        modal.style.display = "block";
-                        modal_closed = true;
+                    if (!hardModal_closed) {
+                        hardModal.style.display = "block";
                         setTimeout(function () {
-                            modal.style.display = "none";
+                            hardModal.style.display = "none";
                         }, 5000);
+                        hardModal_closed = true;
                     }
                 }
             }
@@ -223,11 +227,11 @@ $(document).ready(function () {
                     b = 1;
                     ta.style.backgroundImage = "url('images/little.jpg')";
                     head.innerHTML = "There has been a small accident!!";
-                    if (!modal_closed) {
-                        modal.style.display = "block";
-                        modal_closed = true;
+                    if (!smallModal_closed) {
+                        smallModal.style.display = "block";
+                        smallModal_closed = true;
                         setTimeout(function () {
-                            modal.style.display = "none";
+                            smallModal.style.display = "none";
                         }, 5000);
                     }
                 } else {
@@ -240,12 +244,12 @@ $(document).ready(function () {
                         url: link + "led/set/1"
                     })
                     l.innerHTML = "Light is on. Help required immediately!!!";
-                    if (!modal_closed) {
-                        modal.style.display = "block";
-                        modal_closed = true;
+                    if (!hardModal_closed) {
+                        hardModal.style.display = "block";
                         setTimeout(function () {
-                            modal.style.display = "none";
+                            hardModal.style.display = "none";
                         }, 5000);
+                        hardModal_closed = true;
                     }
                 }
             }
@@ -277,11 +281,20 @@ $(document).ready(function () {
         }
     }, 1000)
 
-    yesbtn.onclick = function () {
-        modal.style.display = "none";
+    yesbtn_s.onclick = function () {
+        smallModal.style.display = "none";
+        amb = true;
     }
-    nobtn.onclick = function () {
-        modal.style.display = "none";
+    nobtn_s.onclick = function () {
+        smallModal.style.display = "none";
+        amb = false;
+    }
+
+    yesbtn_h.onclick = function () {
+        smallModal.style.display = "none";
+    }
+    nobtn_h.onclick = function () {
+        smallModal.style.display = "none";
     }
 
 });
