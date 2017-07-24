@@ -279,9 +279,11 @@ $(document).ready(function () {
 
     yesbtn.onclick = function () {
         modal.style.display = "none";
+        amb = true;
     }
     nobtn.onclick = function () {
         modal.style.display = "none";
+        amb = false;
     }
 
 });
