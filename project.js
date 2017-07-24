@@ -218,6 +218,8 @@ $(document).ready(function () {
             $.ajax({
                 url: link + "led/set/0"
             })
+            b = 0;
+            f = 0;
             $('#lighting').attr('src', 'images/icon/lighting.png');
             l.innerHTML = "Light is off. All is well!!!";
             time = 0;
