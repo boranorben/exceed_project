@@ -63,8 +63,8 @@ $(document).ready(function () {
             url: link + "smoke"
         }).done(function (data) {
             if (data <= 380 && data >= 340) {
-                $('#smoke').attr('src', 'images/icon/fire.png');
-                
+                element.innerHTML = "No smoke detected";
+                $('#smoke').attr('src', 'images/icon/fire.png');                
                 $.ajax({
                     url: link + "glass/set/0"
                 }).done(function () {
@@ -75,7 +75,6 @@ $(document).ready(function () {
             } else {
                 element.innerHTML = "DANGER!! Escape from your vehicle";
                 head.innerHTML = "ESCAPE YOUR VEHICLE NOW!!!";
-                head.style.fontWeight = bold;
                 $('#smoke').attr('src', 'images/icon/fire-red.png');
                 $.ajax({
                     url: link + "glass/set/1"
