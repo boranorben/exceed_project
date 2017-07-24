@@ -117,6 +117,8 @@ $(document).ready(function () {
     }, 1000)
 
     setInterval(() => {
+        var head = document.getElementById("hd");
+        var ta = document.getElementById("tb");
         $.ajax({
             url: link + "front"
         }).done(function (data) {
@@ -124,8 +126,9 @@ $(document).ready(function () {
                 front = data;
                 d_front = new Date();
                 if (data >= soft_front) {
-                    f = true;
-                    console.log("soft front");
+                    f = false;
+                    ta.style.backgroundColor = "#f39c12"; 
+                    head.innerHTML = "There has been a small accident!!";
                 } else if (data >= medium_front) {
                     console.log("medium");
                 } else {
@@ -146,7 +149,8 @@ $(document).ready(function () {
                 back = data;
                 d_back = new Date();
                 if (data >= soft_back) {
-                    console.log("soft back");
+                    back = false;
+
                 } else {
                     console.log("hard back");
                 }
