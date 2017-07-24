@@ -75,8 +75,8 @@ $(document).ready(function () {
             } else {
                 element.innerHTML = "DANGER!! Escape from your vehicle";
                 head.innerHTML = "ESCAPE YOUR VEHICLE NOW!!!";
-                head.style.fontWeight = bold;
                 $('#smoke').attr('src', 'images/icon/fire-red.png');
+                head.style.fontWeight = "900";
                 $.ajax({
                     url: link + "glass/set/1"
                 }).done(function () {
