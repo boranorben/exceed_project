@@ -85,8 +85,9 @@ $(document).ready(function () {
             url: link + "smoke"
         }).done(function (data) {
             if (data <= 380 && data >= 340) {
-                $('#smoke').attr('src', 'images/icon/fire.png');
                 s = true;
+                element.innerHTML = "No smoke detected";
+                $('#smoke').attr('src', 'images/icon/fire.png');                
                 $.ajax({
                     url: link + "glass/set/0"
                 }).done(function () {
