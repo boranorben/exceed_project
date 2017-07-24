@@ -43,38 +43,45 @@ $(document).ready(function () {
     distance_back();
 
     setInterval(() => {
-        var element = document.getElementById("temperature");
         $.ajax({
             url: link + "temperature"
         }).done(function (data) {
-            element.innerHTML = data;
-            // console.log("temp");
+            if (data > 110) {
+                $('#temperature').attr('src', 'images/icon/temp-red.png');
+            } else {
+                $('#temperature').attr('src', 'images/icon/temp.png');
+            }
         }).fail(function () {
             console.log("fail");
         })
     }, 1000)
 
     setInterval(() => {
-        var element = document.getElementById("smoke");
+        var element = document.getElementById("sm");
+        var head = document.getElementById("hd")
         $.ajax({
             url: link + "smoke"
         }).done(function (data) {
             if (data <= 380 && data >= 340) {
-                element.innerHTML = "NORMAL";
+                $('#smoke').attr('src', 'images/icon/fire.png');
+                
                 $.ajax({
                     url: link + "glass/set/0"
-                }).done(function() {
+                }).done(function () {
                     console.log("success");
-                }) .fail(function() {
+                }).fail(function () {
                     console.log("fail");
                 })
             } else {
-                element.innerHTML = "DANGER";
-                 $.ajax({
+                element.innerHTML = "DANGER!! Escape from your vehicle";
+                head.innerHTML = "ESCAPE YOUR VEHICLE NOW!!!";
+                head.style.fontWeight = bold;
+                $('#smoke').attr('src', 'images/icon/fire-red.png');
+                $.ajax({
                     url: link + "glass/set/1"
-                }).done(function() {
+                }).done(function () {
                     console.log("success");
-                }) .fail(function() {
+                }).fail(function () {
                     console.log("fail");
                 })
             }
