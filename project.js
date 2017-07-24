@@ -59,10 +59,24 @@ $(document).ready(function () {
         $.ajax({
             url: link + "smoke"
         }).done(function (data) {
-            if (data === "yes") {
-                element.innerHTML = "DANGER!!!";
-            } else {
+            if (data <= 380 && data >= 340) {
                 element.innerHTML = "NORMAL";
+                $.ajax({
+                    url: link + "glass/set/0"
+                }).done(function() {
+                    console.log("success");
+                }) .fail(function() {
+                    console.log("fail");
+                })
+            } else {
+                element.innerHTML = "DANGER";
+                 $.ajax({
+                    url: link + "glass/set/1"
+                }).done(function() {
+                    console.log("success");
+                }) .fail(function() {
+                    console.log("fail");
+                })
             }
         }).fail(function () {
             console.log("failed");
@@ -84,7 +98,7 @@ $(document).ready(function () {
                     console.log("hard front");
                 }
             }
-                console.log(front);
+            console.log(front);
         }).fail(function () {
             console.log("fail");
         })
