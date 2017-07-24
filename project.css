@@ -1056,6 +1056,18 @@ body.is-loading #banner>.inner {
 	margin: auto;
 }
 
+.popup {
+	text-align: center;
+	margin: auto;
+	align-self: center;
+	font-family:'Didact Gothic', sans-serif;
+}
+
 #yesbtn, #nobtn {
-	background: black;
+	background: white;
+	color: black;
+	border-radius: 20px;
+	margin: auto;
+	border: 0;
+	border-width: 
 }

@@ -259,6 +259,12 @@ $(document).ready(function () {
         }
     }, 1000)
 
+    var btnn = document.getElementById('btn');
+
+    btn.onclick = function() {
+    modal.style.display = "block";
+}
+
     yesbtn.onclick = function () {
         modal.style.display = "none";
     }
