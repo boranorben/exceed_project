@@ -1,6 +1,10 @@
 $(document).ready(function () {
 
     var link = "http://158.108.165.223/data/suckceed/";
+    var t = true;
+    var s = true;
+    var f = true;
+    var b = true;
     var front = 0;
     var back = 0;
     var soft_front = 0;
@@ -43,11 +47,18 @@ $(document).ready(function () {
     distance_back();
 
     setInterval(() => {
+        var t = document.getElementById("tb");
+        var element = document.getElementById("temp");
+        var head = document.getElementById("hd");
         $.ajax({
             url: link + "temperature"
         }).done(function (data) {
             if (data > 110) {
                 $('#temperature').attr('src', 'images/icon/temp-red.png');
+                element.innerHTML = "DANGER!!! Your engine is too hot!!!";
+                t.style.backgroundColor = "#e74c3c"; 
+                head.style.fontWeight = "900";
+                head.style.color = "white";
             } else {
                 $('#temperature').attr('src', 'images/icon/temp.png');
             }
@@ -57,14 +68,23 @@ $(document).ready(function () {
     }, 1000)
 
     setInterval(() => {
+        if(t && s && b && f) {
+            head.style.fontWeight = "100";
+            head.style.color = "black";
+            ta.style.backgroundColor = "#1abc9c";
+        }
+    }, 1000)
+
+    setInterval(() => {
         var element = document.getElementById("sm");
-        var head = document.getElementById("hd")
+        var head = document.getElementById("hd");
+        var ta = document.getElementById("tb");
         $.ajax({
             url: link + "smoke"
         }).done(function (data) {
             if (data <= 380 && data >= 340) {
                 $('#smoke').attr('src', 'images/icon/fire.png');
-                
+                s = true;
                 $.ajax({
                     url: link + "glass/set/0"
                 }).done(function () {
@@ -73,10 +93,13 @@ $(document).ready(function () {
                     console.log("fail");
                 })
             } else {
-                element.innerHTML = "DANGER!! Escape from your vehicle";
+                s = false;
+                element.innerHTML = "DANGER!! Escape from your vehicle now!!!";
                 head.innerHTML = "ESCAPE YOUR VEHICLE NOW!!!";
                 $('#smoke').attr('src', 'images/icon/fire-red.png');
                 head.style.fontWeight = "900";
+                head.style.color = "white";
+                ta.style.backgroundColor = "#e74c3c"; 
                 $.ajax({
                     url: link + "glass/set/1"
                 }).done(function () {
