@@ -80,6 +80,7 @@ $(document).ready(function () {
                     hardModal.style.display = "block";
                     setTimeout(function () {
                         hardModal.style.display = "none";
+                        
                     }, 5000);
                     hardModal_closed = true;
                 }
@@ -153,13 +154,6 @@ $(document).ready(function () {
                     }, 5000);
                     hardModal_closed = true;
                 }
-                $.ajax({
-                    url: link + "glass/set/1"
-                }).done(function () {
-                    console.log("success");
-                }).fail(function () {
-                    console.log("fail");
-                })
             }
         }).fail(function () {
             console.log("failed");
@@ -291,17 +285,10 @@ $(document).ready(function () {
     }
 
     yesbtn_h.onclick = function () {
-        smallModal.style.display = "none";
+        hardModal.style.display = "none";
     }
     nobtn_h.onclick = function () {
-        smallModal.style.display = "none";
-    yesbtn.onclick = function () {
-        modal.style.display = "none";
-        amb = true;
-    }
-    nobtn.onclick = function () {
-        modal.style.display = "none";
-        amb = false;
+        hardModal.style.display = "none";
     }
 
 });
